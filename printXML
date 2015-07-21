@@ -1,0 +1,14 @@
+<?php
+$xml = new SimpleXMLElement('<xml/>');
+		
+		$profile = $xml->addChild('profile');
+		$profile->addChild('First_Name', $human->getFirstname());
+		$profile->addChild('Last_Name', $human->getLastname());
+		$profile->addChild('Job',$human->getJob());
+
+		
+		$doc = dom_import_simplexml($xml)->ownerDocument;
+		$doc->formatOutput = true;
+		$doc->load($xml->asXML());
+		
+		return $doc->saveXML();
